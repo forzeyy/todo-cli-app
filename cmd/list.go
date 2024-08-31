@@ -21,7 +21,7 @@ var listCmd = &cobra.Command{
 
 		t := table.NewWriter()
 		t.SetOutputMirror(os.Stdout)
-		t.AppendHeader(table.Row{"ID", "status", "task name", "description", "created"})
+		t.AppendHeader(table.Row{"ID", "status", "task name", "description", "priority", "created"})
 		for _, task := range tasks {
 			status := " "
 			if task.Status {
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 			} else {
 				undoneTasks += 1
 			}
-			t.AppendRow(table.Row{task.ID, status, task.Name, task.Priority, task.Description, task.CreatedAt.Format("2006-01-02 15:04:05")})
+			t.AppendRow(table.Row{task.ID, status, task.Name, task.Description, task.Priority, task.CreatedAt.Format("2006-01-02 15:04:05")})
 		}
 		t.SetTitle(fmt.Sprintf("you have %d undone tasks!", undoneTasks))
 		t.Render()
